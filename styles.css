@@ -5,12 +5,19 @@ body {
     align-items: cener;
     height: 100vh;
     margin: 0;
+    background-color:#FADEEB;
     }
+
+h1 {
+    color: #D80065;
+}
+
 .calculator {
     background: pink;
     padding: 20px;
     border-radius: 12px;
     width: 350px;
+    max-height: 410px;
     }
   
   .display {
@@ -41,6 +48,12 @@ body {
   
   .buttons button:hover {
     background: #A8004E;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   
