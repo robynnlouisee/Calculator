@@ -28,6 +28,7 @@ const plusBtn = document.getElementById('plus');
 
 const decimalPointBtn = document.getElementById('decimal-point');
 const equalsBtn = document.getElementById('equals')
+const backspaceBtn = document.getElementById('backspace');
 
 function appendNumber(number) {
     if (display.textContent === '0' || shouldResetDisplay) {
@@ -125,3 +126,7 @@ clearBtn.addEventListener("click", () => {
     shouldResetDisplay = false;
     display.textContent = '0';
 })
+
+backspaceBtn.addEventListener("click", () => {
+    display.textContent = display.textContent.slice(0, -1);
+});
