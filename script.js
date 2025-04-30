@@ -55,9 +55,40 @@ function setOperator(op) {
       firstNumber = display.textContent;
       operator = op;
       shouldResetDisplay = true;
+
+      display.textContent = op;
   }
 
 plusBtn.addEventListener('click', () => setOperator('+'));
 minusBtn.addEventListener('click', () => setOperator('-'));
-multiplyBtn.addEventListener('click', () => setOperator('*'));
-divideBtn.addEventListener('click', () => setOperator('/'));
+multiplyBtn.addEventListener('click', () => setOperator('x'));
+divideBtn.addEventListener('click', () => setOperator('÷'));
+
+function evaluate () {
+if (operator === '') return;
+
+secondNumber = display.textContent;
+
+let result;
+
+const num1 = Number(firstNumber);
+const num2 = Number(secondNumber);
+
+if (operator === '+') {
+    result = num1+ num2;
+} else if (operator === '-') {
+    result = num1 - num2;
+} else if (operator === "x") {
+    result = num1 * num2;
+} else if (operator === '÷') {
+    result = num1 / num2;
+}
+
+
+display.textContent = result;
+firstNumber = result;
+operator = '';
+shouldResetDisplay = true;
+}
+
+equalsBtn.addEventListener("click", evaluate);
