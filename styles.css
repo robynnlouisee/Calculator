@@ -18,6 +18,7 @@ h1 {
     border-radius: 12px;
     width: 350px;
     max-height: 410px;
+    box-shadow: 3px 3px 6px , -3px -3px 6px #F6BFD9;
     }
   
   #display {
