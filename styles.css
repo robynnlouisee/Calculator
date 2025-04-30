@@ -20,7 +20,7 @@ h1 {
     max-height: 410px;
     }
   
-  .display {
+  #display {
     background: #FADEEB;
     color: black;
     font-size: 2rem;

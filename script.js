@@ -4,6 +4,7 @@ let operator = '';
 let shouldResetDisplay = false;
 
 const display = document.getElementById('display');
+display.textContent = '0';
 
 const clearBtn = document.getElementById('clear-button');
 const doubleZeroBtn = document.getElementById('double-zero');
@@ -28,93 +29,35 @@ const plusBtn = document.getElementById('plus');
 const decimalPointBtn = document.getElementById('decimal-point');
 const equalsBtn = document.getElementById('equals')
 
-clearBtn.addEventListener("click", handleClear);
-function handleClear () {
-    display.textContent = '0';
-}
+function appendNumber(number) {
+    if (display.textContent === '0' || shouldResetDisplay) {
+      display.textContent = number;
+      shouldResetDisplay = false;
+    } else {
+      display.textContent += number;
+    }
+  }
 
-divideBtn.addEventListener("click", handleDivide);
-function handleDivide () {
-  display.textContent = '÷';
-}
+oneBtn.addEventListener('click', () => appendNumber('1'));
+twoBtn.addEventListener('click', () => appendNumber('2'));
+threeBtn.addEventListener('click', () => appendNumber('3'));
+fourBtn.addEventListener('click', () => appendNumber('4'));
+fiveBtn.addEventListener('click', () => appendNumber('5'));
+sixBtn.addEventListener('click', () => appendNumber('6'));
+sevenBtn.addEventListener('click', () => appendNumber('7'));
+eightBtn.addEventListener('click', () => appendNumber('8'));
+nineBtn.addEventListener('click', () => appendNumber('9'));
+zeroBtn.addEventListener('click', () => appendNumber('0'));
+doubleZeroBtn.addEventListener('click', () => appendNumber('00'));
 
-multiplyBtn.addEventListener("click", handleMultiply);
-function handleMultiply () {
-  display.textContent = 'x';
-}
+function setOperator(op) {
+    if (operator !== '') return;
+      firstNumber = display.textContent;
+      operator = op;
+      shouldResetDisplay = true;
+  }
 
-minusBtn.addEventListener("click", handleMinus);
-function handleMinus () {
-  display.textContent = '-'
-}
-
-plusBtn.addEventListener("click", handlePlus);
-function handlePlus () {
-  display.textContent = '+'
-}
-
-
-doubleZeroBtn.addEventListener("click", handleDoubleZero);
-function handleDoubleZero () {
-    display.textContent = '00';
-}
-
-zeroBtn.addEventListener("click", handleZero);
-function handleZero () {
-    display.textContent = '0';
-}
-
-sevenBtn.addEventListener("click", handleSeven);
-function handleSeven () {
-    display.textContent = '7';
-}
-
-eightBtn.addEventListener("click", handleEight);
-function handleEight () {
-    display.textContent = '8';
-}
-
-nineBtn.addEventListener("click", handleNine);
-function handleNine () {
-    display.textContent = '9';
-}
-
-fourBtn.addEventListener("click", handleFour);
-function handleFour () {
-    display.textContent = '4';
-}
-
-fiveBtn.addEventListener("click", handleFive);
-function handleFive () {
-    display.textContent = '5';
-}
-
-sixBtn.addEventListener("click", handleSix);
-function handleSix () {
-    display.textContent = '6';
-}
-
-oneBtn.addEventListener("click", handleOne);
-function handleOne () {
-    display.textContent = '1';
-}
-
-twoBtn.addEventListener("click", handleTwo);
-function handleTwo () {
-    display.textContent = '2';
-}
-
-threeBtn.addEventListener("click", handleThree);
-function handleThree () {
-    display.textContent = '3';
-}
-
-decimalPointBtn.addEventListener("click", handleDecimalPoint);
-function handleDecimalPoint () {
-    display.textContent = ".";
-}
-
-equalsBtn.addEventListener("click", handleEquals);
-function handleEquals () {
-    display.textContent = "=";
-}
+plusBtn.addEventListener('click', () => setOperator('+'));
+minusBtn.addEventListener('click', () => setOperator('-'));
+multiplyBtn.addEventListener('click', () => setOperator('*'));
+divideBtn.addEventListener('click', () => setOperator('/'));
