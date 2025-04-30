@@ -31,12 +31,18 @@ const equalsBtn = document.getElementById('equals')
 
 function appendNumber(number) {
     if (display.textContent === '0' || shouldResetDisplay) {
-      display.textContent = number;
+      display.textContent = '';
       shouldResetDisplay = false;
-    } else {
-      display.textContent += number;
+    } 
+    
+    if (operator === '') {
+        firstNumber += number;
+        display.textContent = firstNumber;
+    }  else {
+        secondNumber += number;
+        display.textContent = `${firstNumber} ${operator} ${secondNumber}`;
     }
-  }
+}
 
 oneBtn.addEventListener('click', () => appendNumber('1'));
 twoBtn.addEventListener('click', () => appendNumber('2'));
@@ -56,7 +62,7 @@ function setOperator(op) {
       operator = op;
       shouldResetDisplay = true;
 
-      display.textContent = op;
+      display.textContent += ' ' + op + ' ';
   }
 
 plusBtn.addEventListener('click', () => setOperator('+'));
@@ -64,18 +70,36 @@ minusBtn.addEventListener('click', () => setOperator('-'));
 multiplyBtn.addEventListener('click', () => setOperator('x'));
 divideBtn.addEventListener('click', () => setOperator('÷'));
 
+decimalPointBtn.addEventListener("click", () => {
+    if (shouldResetDisplay) {
+        display.textContent = '0';
+        shouldResetDisplay = false;
+    }
+
+    const parts = display.textContent.split(' ');
+    const currentNumber = parts[parts.length - 1];
+  
+    if (!currentNumber.includes('.')) {
+      display.textContent += '.';
+
+      if (operator ==='') {
+        firstNumber += '.';
+      } else {
+        secondNumber += '.';
+      }
+    }
+  });
+  
+
 function evaluate () {
-if (operator === '') return;
+if (firstNumber === '' || operator === '' || secondNumber === '') return;
 
-secondNumber = display.textContent;
-
+const num1 = parseFloat(firstNumber);
+const num2 = parseFloat(secondNumber);
 let result;
 
-const num1 = Number(firstNumber);
-const num2 = Number(secondNumber);
-
 if (operator === '+') {
-    result = num1+ num2;
+    result = num1 + num2;
 } else if (operator === '-') {
     result = num1 - num2;
 } else if (operator === "x") {
@@ -86,9 +110,18 @@ if (operator === '+') {
 
 
 display.textContent = result;
-firstNumber = result;
+firstNumber = result.toString();
+secondNumber = '';
 operator = '';
 shouldResetDisplay = true;
 }
 
 equalsBtn.addEventListener("click", evaluate);
+
+clearBtn.addEventListener("click", () => {
+    firstNumber = '';
+    secondNumber = '';
+    operator = '';
+    shouldResetDisplay = false;
+    display.textContent = '0';
+})
